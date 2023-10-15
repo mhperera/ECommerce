@@ -41,7 +41,7 @@ const Footer = () => {
       <div className="bottom">
 
         <div className="left">
-          <span className="logo">MANA STORE</span>
+          <span className="logo">MANASTORE</span>
           <span className="copyright"> &copy; 2023 All Rights Reserved</span>
         </div>
 
