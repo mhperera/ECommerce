@@ -18,6 +18,12 @@
                 height: 100%;
                 object-fit: cover;
                 position: absolute;
+                transition: all 1s ease;
+
+                &:hover{
+                    scale: 1.05;
+                }
+
             } 
 
             .first-image{
