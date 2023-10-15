@@ -1,0 +1,36 @@
+.contact{
+    background: #1367d4;
+    color: #fff;
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .wrapper{
+        max-width: 900px;
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        input{
+            padding: 10px 30px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        button{
+            padding: 10px 30px;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            background: #000;
+            color: #fff;
+        }
+
+        .icons{
+            display: flex;
+            gap: 8px;
+        }
+
+    }
+}
