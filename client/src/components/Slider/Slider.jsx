@@ -26,11 +26,11 @@ const Slider = () => {
     return (
         <div className='slider'>
             <div className="container" style={{ 'transform': `translateX(-${currentSlide*100}vw)` }}>
-                <img src={sliderImageList[0]} alt="" />
-                <img src={sliderImageList[1]} alt="" />
-                <img src={sliderImageList[2]} alt="" />
-                <img src={sliderImageList[3]} alt="" />
-                <img src={sliderImageList[4]} alt="" />
+                <img src={sliderImageList[0]} alt="" onClick={nextSlide} />
+                <img src={sliderImageList[1]} alt="" onClick={nextSlide} />
+                <img src={sliderImageList[2]} alt="" onClick={nextSlide} />
+                <img src={sliderImageList[3]} alt="" onClick={nextSlide} />
+                <img src={sliderImageList[4]} alt="" onClick={nextSlide} />
             </div>
             <div className="icons">
                 <div className="icon" onClick={previousSlide}><ArrowBackIosNewSharpIcon /></div>
