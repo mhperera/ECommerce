@@ -1,47 +1,76 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import "./FeaturedProducts.scss";
 import Card from '../Card/Card';
 
 const fearturedProducts = [
-    {
-        id: 1,
-        img: 'https://images.pexels.com/photos/6334400/pexels-photo-6334400.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        img2: 'https://images.pexels.com/photos/16649248/pexels-photo-16649248/free-photo-of-model-in-tshirt-with-print.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        title: 'Long Sleeve Graphic T-Shirt',
-        isNew: true,
-        oldPrice: 19,
-        price: 12,
-    },
-    {
-        id: 2,
-        img: 'https://images.pexels.com/photos/16048125/pexels-photo-16048125/free-photo-of-young-woman-in-casual-clothes-posing-in-studio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        img2: 'https://images.pexels.com/photos/16048170/pexels-photo-16048170/free-photo-of-young-woman-in-casual-clothes-posing-in-studio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        title: 'Short Sleeve Large T-Shirt',
-        isNew: true,
-        oldPrice: 19,
-        price: 12,
-    },
-    {
-        id: 3,
-        img: 'https://images.pexels.com/photos/14455769/pexels-photo-14455769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        img2: 'https://images.pexels.com/photos/12846225/pexels-photo-12846225.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        title: 'Printed Tops',
-        isNew: true,
-        oldPrice: 19,
-        price: 12,
-    },
-    {
-        id: 4,
-        img: 'https://images.pexels.com/photos/8811244/pexels-photo-8811244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        img2: 'https://images.pexels.com/photos/2363825/pexels-photo-2363825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        title: 'Heigh Waist Denim',
-        isNew: true,
-        oldPrice: 19,
-        price: 12,
+      {
+          id: 1,
+          img: 'https://images.pexels.com/photos/6334400/pexels-photo-6334400.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          img2: 'https://images.pexels.com/photos/16649248/pexels-photo-16649248/free-photo-of-model-in-tshirt-with-print.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          title: 'Long Sleeve Graphic T-Shirt',
+          isNew: true,
+          oldPrice: 19,
+          price: 12,
+      },
+      {
+          id: 2,
+          img: 'https://images.pexels.com/photos/16048125/pexels-photo-16048125/free-photo-of-young-woman-in-casual-clothes-posing-in-studio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          img2: 'https://images.pexels.com/photos/16048170/pexels-photo-16048170/free-photo-of-young-woman-in-casual-clothes-posing-in-studio.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          title: 'Short Sleeve Large T-Shirt',
+          isNew: true,
+          oldPrice: 19,
+          price: 12,
+      },
+      {
+          id: 3,
+          img: 'https://images.pexels.com/photos/14455769/pexels-photo-14455769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          img2: 'https://images.pexels.com/photos/12846225/pexels-photo-12846225.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          title: 'Printed Tops',
+          isNew: true,
+          oldPrice: 19,
+          price: 12,
+      },
+      {
+          id: 4,
+          img: 'https://images.pexels.com/photos/8811244/pexels-photo-8811244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          img2: 'https://images.pexels.com/photos/2363825/pexels-photo-2363825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          title: 'Heigh Waist Denim',
+          isNew: true,
+          oldPrice: 19,
+          price: 12,
     },
 ];
 
 const FeaturedProducts = ({type}) => {
+
+  const [data, setData] = useState([]);
+
+  useEffect(()=>{
+
+    const fetchData = async () => {
+      try { 
+
+          console.log(import.meta.env.VITE_APP_API_TOKEN)
+
+          const response = await axios.get(import.meta.env.VITE_APP_API_URL+'/products', {
+                          headers: {
+                            Authorization: "Bearer "+import.meta.env.VITE_APP_API_TOKEN
+                          }
+                        });
+
+          console.log(response);
+
+          
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+
+  }, []);
+
   return (
     <div className='featured-products'>
 
