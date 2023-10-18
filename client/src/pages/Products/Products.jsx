@@ -1,14 +1,23 @@
 import React, { useState } from 'react'
 import List from './../../components/List/List';
 import { useParams } from 'react-router-dom';
+import useFetch from './../../hooks/useFetch';
 import "./Products.scss";
 
 const Products = () => {
 
-  const [maxPrice, setMaxPrice] = useState(1000);
-  const [sort, setSort] = useState(null);
-
   const categoryId = parseInt(useParams().id);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [sort, setSort] = useState('asc');
+  const [selectedSubCategories, setSelectedSubCategories] = useState([]);
+
+  const { data: subCategories, loading, error} = useFetch(`/sub-categories?[filters][categories][id][$eq]=${categoryId}`);
+
+  const handleSubCategoryChange = (event) => {
+    const value = event.target.value;
+    const isChecked = event.target.checked;
+    setSelectedSubCategories(isChecked ? [...selectedSubCategories, value] : selectedSubCategories.filter((subCat)=>subCat!==value));
+  }
 
   return (
     <div className='products'>
@@ -19,34 +28,19 @@ const Products = () => {
 
           <h3>Product Categories</h3>
 
-          <div className="input-item">
-            <input 
-              type="checkbox" 
-              name="" id="1" 
-              value={1}
-            />
-            <label htmlFor="1">T-Shirts</label>
-          </div>
-
-          <div className="input-item">
-            <input 
-              type="checkbox" 
-              name="" 
-              id="2" 
-              value={2}
-            />
-            <label htmlFor="2">Shirts</label>
-          </div>
-
-          <div className="input-item">
-            <input 
-              type="checkbox" 
-              name="" 
-              id="3" 
-              value={3}
-            />
-            <label htmlFor="3">Trousers</label>
-          </div>
+          {
+            subCategories?.map((subCategory)=>(
+                <div className="input-item" key={subCategory.id}>
+                  <input 
+                    type="checkbox" 
+                    name="" id={subCategory.id} 
+                    value={subCategory.id} 
+                    onChange={handleSubCategoryChange}
+                  />
+                  <label htmlFor={subCategory.id} >{subCategory.attributes.title} </label>
+              </div>
+            ))
+          }
 
         </div>
 
@@ -110,6 +104,7 @@ const Products = () => {
           categoryId={categoryId} 
           maxPrice={maxPrice}
           sort={sort}
+          selectedSubCategories={selectedSubCategories}
         />
       </div>
 
